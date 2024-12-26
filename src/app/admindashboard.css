@@ -1,0 +1,23 @@
+/* *{
+    background-color: #f6c8e5;
+} */
+
+.tab-content{
+    background-color: #d1c0f5;
+    /* background-color: #fae9f0; */
+    
+}
+
+.panel .block
+{
+    background-color: #de638a; 
+    color: whitesmoke;
+}
+
+.panel a:hover{
+    background-color: #f7b9c4; 
+    color: black;
+}
+
+
+

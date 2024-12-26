@@ -1,0 +1,42 @@
+
+.full-sidebar
+{
+    background-color: #c6badb;
+    
+    /* background-color:#fae9f0; */
+}
+.nav-item a {
+    color: #000000;
+}
+
+.nav-item a:hover
+{
+    background-color:#7268a6;
+    color: whitesmoke;
+}
+
+.nav-item a:hover
+{
+    background-color:#7268a6;
+    color: whitesmoke;
+}
+.nav-item a span :hover
+{
+    color: whitesmoke;
+}
+.nav-item button span
+{
+    color: 000000;
+}
+
+.nav-item button:hover
+{
+    background-color:#7268a6;
+    color: whitesmoke;
+}
+
+
+/* .sub-menu li a:hover
+{
+    color: #29242c;
+} */

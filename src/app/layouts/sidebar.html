@@ -1,0 +1,321 @@
+﻿
+<head>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=content_cut" /> -->
+</head>
+
+
+  <div [ngClass]="{ 'dark text-white-dark': store.semidark }">
+  <nav
+    class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300"
+  >
+    <div class="full-sidebar h-full bg-white dark:bg-[#0e1726]">
+      <div class="flex items-center justify-between px-2 pt-4">
+        <!-- Logo and text section -->
+        <!-- <a routerLink="/" class="main-logo flex items-center ml-16 ml-[-2px]">
+          <img
+            class="flex-none"
+            src="/assets/images/logo.png"
+            alt="Logo"
+          />
+        </a> -->
+
+        <a
+          href="javascript:;"
+          class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 hover:text-primary dark:text-white-light dark:hover:bg-dark-light/10 rtl:rotate-180 ml-auto"
+          (click)="storeData.dispatch({ type: 'toggleSidebar' })"
+        >
+          <icon-carets-down class="m-auto rotate-90" />
+        </a>
+      </div>
+
+      <ng-scrollbar class="relative !h-[calc(100vh-80px)]" appearance="compact">
+        <ul class="relative space-y-0.5 p-4 py-0 font-semibold">
+          <li class="nav-item" *ngIf="user.role == 'Admin' || user.role == 'Employee' ">
+            <a
+              routerLink="Lading-Page"
+              class="group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-dashboard
+                  class="shrink-0 group-hover:!text-primary"
+                />
+                <span
+                  class="dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">
+                  {{ 'Landing Page' | translate }}
+                </span>
+              </div>
+            </a>
+          </li>
+          
+          <li class="nav-item" *ngIf="user.role == 'Consultant'">
+            <a
+              routerLink="Consultant-Dashboard"
+              class="group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-dashboard
+                  class="shrink-0 group-hover:!text-primary"
+                />
+                <span
+                  class="tdark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Consultant-Dashboard' | translate }}
+                </span>
+              </div>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item" *ngIf="user.role == 'Consultant'">
+            <a
+              routerLink="apps/consultantschedule"
+              class="group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-dashboard
+                  class="shrink-0 group-hover:!text-primary"
+                />
+                <span
+                  class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Consultant-Schedule' | translate }}
+                </span>
+              </div>
+            </a>
+          </li> -->
+
+          <li
+            class="accordion menu nav-item"
+            *ngIf="hasAccess('3') || hasAccess('4') || hasAccess('5') || hasAccess('6') || hasAccess('7')  || hasAccess('13') || hasAccess('14')"
+          >
+            <button
+              type="button"
+              class="nav-link group w-full"
+              [ngClass]="{ active: activeDropdown.includes('components') }"
+              (click)="toggleAccordion('components')"
+            >
+              <div class="flex items-center">
+                <icon-menu-widgets
+                  class="shrink-0 group-hover:!text-primary"
+                />
+                <span
+                  class="text-black :text-[#506690] dark:group-hover:text-white ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Masters' | translate }}
+                </span>
+              </div>
+              <div
+                [ngClass]="{ 'rtl:rotate-90 -rotate-90': !activeDropdown.includes('components') }"
+              >
+                <icon-caret-down />
+              </div>
+            </button>
+            <div
+              [@slideDownUp]="!activeDropdown.includes('components')"
+              class="accordion-content"
+            >
+              <ul class="sub-menu text-gray-500">
+                <li *ngIf="hasAccess('3')">
+                  <a
+                    routerLink="/apps/Branch"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Branch' | translate }}
+                  </a>
+                </li>
+                <!-- <li *ngIf="hasAccess('2')">
+                  <a
+                    routerLink="/apps/Health-and-Wellness-Services"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Health & Wellness Services' | translate }}
+                  </a>
+                </li> -->
+                <li *ngIf="hasAccess('4')">
+                  <!-- <i class="fa-solid fa-scissors"></i> -->
+
+                  <a
+                    routerLink="/apps/Consultants"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                  
+                    {{ 'Stylist' | translate }}
+                  </a>
+                </li>
+                <li *ngIf="hasAccess('5')">
+                  <a
+                    routerLink="/apps/Schedule"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Schedule' | translate }}
+                  </a>
+                </li>
+                <li *ngIf="hasAccess('6')">
+                  <a
+                    routerLink="/apps/Holiday"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Holiday' | translate }}
+                  </a>
+                </li>
+                <li *ngIf="hasAccess('7')">
+                  <a
+                    routerLink="/apps/Employee"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Employee' | translate }}
+                  </a>
+                </li>
+                <!-- <li >
+                  <a
+                    routerLink="/apps/Menu"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Menu' | translate }}
+                  </a>
+                </li> -->
+                <!-- <li *ngIf="hasAccess('9')">
+                  <a
+                    routerLink="/forms/bookappointment"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Book Appointment' | translate }}
+                  </a>
+                </li> -->
+
+                <li *ngIf="hasAccess('13')">
+                  <a
+                    routerLink="/apps/RadiologyTest"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                    >{{ 'RadiologyTest' | translate }}</a
+                  >
+                </li>
+
+                <li *ngIf="hasAccess('14')">
+                  <a
+                    routerLink="/apps/LabTest"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                    >{{ 'LabTest' | translate }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item" *ngIf="hasAccess('10')">
+            <a
+              routerLink="/apps/calendar"
+              class="group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-calendar
+                  class="shrink-0 group-hover:!text-primary"
+                />
+                <span
+                  class="dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'calendar' | translate }}
+                </span>
+              </div>
+            </a>
+          </li>
+<!-- 
+          <li class="menu nav-item" *ngIf="hasAccess('11')">
+            <a
+              routerLink="/manageSlots"
+              class="nav-link group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-todo class="shrink-0 group-hover:!text-primary" />
+                <span
+                  class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Manage Slots' | translate }}
+                </span>
+              </div>
+            </a>
+          </li> -->
+
+          <li class="menu nav-item" *ngIf="hasAccess('15')">
+            <a
+              routerLink="/appointment-form"
+              class="nav-link group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-calendar class="shrink-0 group-hover:!text-primary" />
+                <span
+                  class="dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Appointment Form' | translate }}
+                </span>
+              </div>
+            </a>
+          </li>
+
+          <li class="menu nav-item" *ngIf="hasAccess('9')">
+            <a
+              routerLink="/forms/bookappointment"
+              class="nav-link group"
+              routerLinkActive="active"
+              (click)="toggleMobileMenu()"
+            >
+              <div class="flex items-center">
+                <icon-menu-calendar class="shrink-0 group-hover:!text-primary" />
+                <span
+                  class="dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                >
+                  {{ 'Book Appointment' | translate }}
+                </span>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item" *ngIf="hasAccess('12')">
+            <ul>
+              <li class="nav-item">
+                <a
+                  routerLink="Reports"
+                  class="group"
+                  routerLinkActive="active"
+                  (click)="toggleMobileMenu()"
+                >
+                  <div class="flex items-center">
+                    <icon-menu-documentation
+                      class="menu-icon shrink-0 group-hover:!text-primary"
+                    />
+                    
+                    <span
+                      class="dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3"
+                      >{{ 'Reports' | translate }}</span
+                    >
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ng-scrollbar>
+    </div>
+  </nav>
+</div>
