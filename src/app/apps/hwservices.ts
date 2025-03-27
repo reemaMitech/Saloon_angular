@@ -40,7 +40,7 @@ export class hwservicesComponent {
 
   fetchdataes() {
     this.apiService.get("read/tbl_section").subscribe(
-    // this.http.get("http://localhost/OPDClinic/read/tbl_section").subscribe(
+    // this.http.get("http://localhost/salonClinic/read/tbl_section").subscribe(
       (response: any) => {
         if (response.status === 200) {
           this.contactList = response.data; // Assign data to contactList
@@ -90,7 +90,7 @@ export class hwservicesComponent {
       // Update user in the API
       // this.http
       //   .post(
-      //     `http://localhost/OPDClinic/update/tbl_section/${formData.id}`,
+      //     `http://localhost/salonClinic/update/tbl_section/${formData.id}`,
       //     requestBody
       //   )
       //   .subscribe(
@@ -122,7 +122,7 @@ export class hwservicesComponent {
     } else {
       // Add user to the API
       // this.http
-      //   .post("http://localhost/OPDClinic/create/tbl_section", requestBody)
+      //   .post("http://localhost/salonClinic/create/tbl_section", requestBody)
       //   .subscribe(
         this.apiService.post("create/tbl_section", requestBody).subscribe(
 
@@ -159,7 +159,7 @@ export class hwservicesComponent {
 
   //   this.http
   //     .post(
-  //       `http://localhost/OPDClinic/delete/tbl_section/${formData.id}`,
+  //       `http://localhost/salonClinic/delete/tbl_section/${formData.id}`,
   //       requestBody
   //     )
   //     .subscribe(

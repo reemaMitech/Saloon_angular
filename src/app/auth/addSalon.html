@@ -1,0 +1,75 @@
+<div class="relative min-h-screen flex items-center justify-center bg-[url('/assets/images/salonbg1.jpg')] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
+  
+    <!-- Background Overlay -->
+    <div class="absolute inset-0">
+        <!-- <img src="/assets/images/auth/bg-gradient.png" alt="background" class="h-full w-full object-cover" /> -->
+    </div>
+  
+    <!-- Form Container -->
+    <div class="relative w-full max-w-lg bg-white shadow-md rounded-lg p-6 backdrop-blur-lg bg-opacity-80 dark:bg-black/50">
+      
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+          <img src="/assets/images/logo.jpg" alt="Logo" class="h-16 w-auto" />
+      </div>
+  
+      <h1 class="text-2xl font-bold text-center text-primary mb-4">Register Your Salon</h1>
+  
+      <form [formGroup]="salonForm" (ngSubmit)="submitSalon()">
+        
+        <!-- Owner First Name -->
+        <div class="mb-4">
+          <label class="block font-medium">First Name</label>
+          <input type="text" formControlName="firstName" class="form-input w-full p-2 border rounded" placeholder="Enter first name" />
+          <div class="text-red-500 text-sm" *ngIf="f['firstName'].invalid && f['firstName'].touched">
+            * Only alphabets, spaces, and dots allowed
+          </div>
+        </div>
+    
+        <!-- Owner Last Name -->
+        <div class="mb-4">
+          <label class="block font-medium">Last Name</label>
+          <input type="text" formControlName="lastName" class="form-input w-full p-2 border rounded" placeholder="Enter last name" />
+          <div class="text-red-500 text-sm" *ngIf="f['lastName'].invalid && f['lastName'].touched">
+            * Only alphabets, spaces, and dots allowed
+          </div>
+        </div>
+    
+        <!-- Salon Name -->
+        <div class="mb-4">
+          <label class="block font-medium">Salon Name</label>
+          <input type="text" formControlName="name" class="form-input w-full p-2 border rounded" placeholder="Enter salon name" />
+          <div class="text-red-500 text-sm" *ngIf="f['name'].invalid && f['name'].touched">
+            * Salon name is required
+          </div>
+        </div>
+    
+        <!-- Mobile Number -->
+        <div class="mb-4">
+          <label class="block font-medium">Mobile Number</label>
+          <input type="text" formControlName="mobile" class="form-input w-full p-2 border rounded" placeholder="Enter mobile number" />
+          <div class="text-red-500 text-sm" *ngIf="f['mobile'].invalid && f['mobile'].touched">
+            * Enter a valid 10-digit mobile number
+          </div>
+        </div>
+    
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="block font-medium">Password</label>
+          <input type="password" formControlName="password" class="form-input w-full p-2 border rounded" placeholder="Enter password" />
+          <div class="text-red-500 text-sm" *ngIf="f['password'].invalid && f['password'].touched">
+            * Password must have at least 8 characters, one uppercase, one lowercase, one number, and one special character
+          </div>
+        </div>
+    
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-full mt-4" [disabled]="salonForm.invalid">
+          Register Salon
+        </button>
+    
+      </form>
+  
+    </div>
+  
+  </div>
+  

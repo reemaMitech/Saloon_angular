@@ -320,7 +320,7 @@ export class AdminDashComponent {
     this.isLoading = true;
     const endpoint = `get_todays_appointment_data/tbl_appointment`;
     this.apiService.get(endpoint).subscribe(
-    // this.http.get( "http://localhost/OPDClinic/get_todays_appointment_data/tbl_appointment").subscribe(
+    // this.http.get( "http://localhost/salonClinic/get_todays_appointment_data/tbl_appointment").subscribe(
         (response: any) => {
           console.log("Fetch Response:", response); // Log the full response to check the structure
 
@@ -343,7 +343,7 @@ export class AdminDashComponent {
   }
 
   fetchBranches() {
-    // this.http.get<any>("http://localhost/OPDClinic/read/tbl_branch").subscribe(
+    // this.http.get<any>("http://localhost/salonClinic/read/tbl_branch").subscribe(
       this.apiService.get("read/tbl_branch").subscribe(
         (response) => {
           if (response.status === 200) {
@@ -377,7 +377,7 @@ export class AdminDashComponent {
     this.filteredRows = [];
     this.isLoading = true;
 
-    // const apiUrl = `http://localhost/OPDClinic/getslots/tbl_slots`;
+    // const apiUrl = `http://localhost/salonClinic/getslots/tbl_slots`;
     const endpoint = 'getslots/tbl_slots';
     const apiUrl = `${this.apiService.getBaseUrl()}/${endpoint}`;
 
@@ -430,7 +430,7 @@ export class AdminDashComponent {
 
   fetchConsultants() {
     const role = "Consultant"; // Define the role you want to filter by
-    // this.http.get<any>(`http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
+    // this.http.get<any>(`http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
       const endpoint = `get_where_condition_data/tbl_register/${role}`;
       this.apiService.get(endpoint).subscribe(
     (response) => {
@@ -460,7 +460,7 @@ export class AdminDashComponent {
   fetchConductedAppointments() {
     this.isLoading = true;
     this.apiService.get("get_conducted_appointments").subscribe(
-    // this.http.get("http://localhost/OPDClinic/get_conducted_appointments").subscribe(
+    // this.http.get("http://localhost/salonClinic/get_conducted_appointments").subscribe(
         (response: any) => {
           if (response.status === 200) {
             this.conductedAppointments = response.data; // Store conducted appointments data
@@ -490,7 +490,7 @@ export class AdminDashComponent {
       appointment_status: "CD",
     };
     this.apiService.post("submitPayment", transformedData).subscribe(
-    // this.http.post("http://localhost/OPDClinic/submitPayment", transformedData).subscribe(
+    // this.http.post("http://localhost/salonClinic/submitPayment", transformedData).subscribe(
         (response: any) => {
           console.log("Payment submitted:", response);
           this.fetchTodaysAppointments();
@@ -506,7 +506,7 @@ export class AdminDashComponent {
   fetchPendingAppointments() {
     this.isLoading = true;
 
-    // this.http.get("http://localhost/OPDClinic/get_pending_appointments").subscribe(
+    // this.http.get("http://localhost/salonClinic/get_pending_appointments").subscribe(
       this.apiService.get("get_pending_appointments").subscribe(
         (response: any) => {
           if (response.status === 200) {
@@ -530,7 +530,7 @@ export class AdminDashComponent {
     this.isLoading = true;
     this.apiService.get("get_cancelled_appointments").subscribe(
 
-    // this.http.get("http://localhost/OPDClinic/get_cancelled_appointments").subscribe(
+    // this.http.get("http://localhost/salonClinic/get_cancelled_appointments").subscribe(
         (response: any) => {
           if (response.status === 200) {
             this.cancelledAppointments = response.data; // Store upcoming appointments data
@@ -552,7 +552,7 @@ export class AdminDashComponent {
   fetchUpcomingAppointments() {
     this.isLoading = true;
     this.apiService.get("get_upcoming_appointments").subscribe(
-    // this.http.get("http://localhost/OPDClinic/get_upcoming_appointments").subscribe(
+    // this.http.get("http://localhost/salonClinic/get_upcoming_appointments").subscribe(
         (response: any) => {
           if (response.status === 200) {
             this.upcomingAppointments = response.data; // Store upcoming appointments data
@@ -609,7 +609,7 @@ export class AdminDashComponent {
     filters.appointment_status = appointmentStatus;
     this.isLoading = true;
 
-    // this.http.post("http://localhost/OPDClinic/get_filtered_appointments/tbl_appointment",filters).subscribe(
+    // this.http.post("http://localhost/salonClinic/get_filtered_appointments/tbl_appointment",filters).subscribe(
       this.apiService.post("get_filtered_appointments/tbl_appointment", filters).subscribe(
 
       (response: any) => {
@@ -934,7 +934,7 @@ export class AdminDashComponent {
   canceledshedule(formData: any) {
     const requestBody = {};
 
-    // this.http.post(`http://localhost/OPDClinic/canceledshedule/tbl_appointment/${formData.id}`,requestBody).subscribe(
+    // this.http.post(`http://localhost/salonClinic/canceledshedule/tbl_appointment/${formData.id}`,requestBody).subscribe(
       this.apiService.post(`canceledshedule/tbl_appointment/${formData.id}`, requestBody).subscribe(
       (response) => {
           console.log("Cancel response:", response);

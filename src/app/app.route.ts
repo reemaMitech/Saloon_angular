@@ -34,12 +34,17 @@ import { KnowledgeBaseComponent } from './pages/knowledge-base';
 import { FaqComponent } from './pages/faq';
 
 // appointment form
-import { AppointmentFormComponent } from './forms/appointment-form';
+// import { AppointmentFormComponent } from './forms/appointment-form';
 
 // auth components
 import { BoxedSignupComponent } from './auth/boxed-signup'; // Import BoxedSignupComponent
 
 import { PatientDetailsComponent } from './patientdetails'; // Import the component
+
+import { addSalonComponent } from './auth/addSalon'; // Import addSalon
+
+
+
 
 export const routes: Routes = [
     {
@@ -54,7 +59,7 @@ export const routes: Routes = [
             // dashboard
             { path: '', component: AdminDashComponent, data: { title: 'Admin Dashboard' } },
             { path: 'analytics', component: AnalyticsComponent, data: { title: 'Analytics Admin' } },
-            { path: 'Lading-Page', component: AdminDashComponent, data: { title: 'Lading Page' } },
+            { path: 'Landing-Page', component: AdminDashComponent, data: { title: 'Landing Page' } },
             { path: 'Super-Admin', component: ConsultantsdashboardComponent, data: { title: 'Admin Dashboard' } },
 
             { path: 'crypto', component: CryptoComponent, data: { title: 'Crypto Admin' } },
@@ -107,10 +112,12 @@ export const routes: Routes = [
         component: AuthLayout,
         children: [
             // Appointment Form Route without Sidebar
-            { path: 'appointment-form', component: AppointmentFormComponent, data: { title: 'Appointment Form' } },
+            // { path: 'appointment-form', component: AppointmentFormComponent, data: { title: 'Appointment Form' } },
 
             // auth routes
             { path: 'auth/signin', component: BoxedSignupComponent, data: { title: 'Boxed SignIn' } }, // New signup path
+
+            { path: 'auth/addSalon', component: addSalonComponent, data: { title: 'addSalon' } },
 
             // additional pages
             { path: '', loadChildren: () => import('./pages/pages.module').then((d) => d.PagesModule) },

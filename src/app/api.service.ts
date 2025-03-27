@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',  // This ensures that ApiService is available globally
 })
 export class ApiService {
-  private baseUrl = 'https://opdclinic.greatfive.in/'; // Replace with your API base URL
+  private baseUrl = 'http://localhost/salonClinic'; // Replace with your API base URL
 
   constructor(private http: HttpClient) {}
 

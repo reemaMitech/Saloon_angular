@@ -9,13 +9,15 @@ import { ScrumboardComponent } from "./scrumboard";
 import { BranchComponent } from "./branch";
 import { hwservicesComponent } from "./hwservices";
 import { HolidayComponent } from "./holiday";
-import { LabTestComponent } from "./labtest";
+import { ServiceComponent } from "./service";
 import { RadiologyTestComponent } from "./radiologytest";
 import { EmployeeComponent } from "./employee";
 import { MenuComponent } from "./menu";
 
 import { ConsultantScheduleComponent } from './consultantschedule';
 import { AddclinicComponent } from "./addclinic";
+
+import { ChairComponent } from "./chair";
 
 
 
@@ -67,9 +69,9 @@ const routes: Routes = [
     data: { title: "Holiday" },
   },
   {
-    path: "apps/LabTest",
-    component: LabTestComponent,
-    data: { title: "LabTest" },
+    path: "apps/Service",
+    component: ServiceComponent,
+    data: { title: "Service" },
   },
   {
     path: "apps/RadiologyTest", 
@@ -111,7 +113,9 @@ const routes: Routes = [
     data: { title: "Menu" },
   },
 
-  { path: "apps/notes", component: NotesComponent, data: { title: "Notes" } },
+  { path: "apps/notes", 
+    component: NotesComponent, 
+    data: { title: "Notes" } },
   {
     path: "apps/todolist",
     component: TodolistComponent,
@@ -142,6 +146,11 @@ const routes: Routes = [
     component: CalendarComponent,
     data: { title: "Calendar" },
   },
+  {
+  path: "apps/Chair",
+  component: ChairComponent,
+  data: { title: "Chair" },
+  },
 ];
 
 @NgModule({
@@ -157,7 +166,7 @@ const routes: Routes = [
     AddclinicComponent,
     hwservicesComponent,
     HolidayComponent,
-    LabTestComponent,
+    ServiceComponent,
     RadiologyTestComponent,
     ContactsComponent,
     ConsultantsComponent,
@@ -172,7 +181,7 @@ const routes: Routes = [
     MailboxComponent,
     EmployeeComponent,
     MenuComponent,
-
+    ChairComponent
   ],
 })
 export class AppsModule {}

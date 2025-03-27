@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // shared module
 import { SharedModule } from 'src/shared.module';
@@ -13,6 +14,7 @@ import { CoverLockscreenComponent } from './cover-lockscreen';
 import { CoverLoginComponent } from './cover-login';
 import { CoverPasswordResetComponent } from './cover-password-reset';
 import { CoverRegisterComponent } from './cover-register';
+import { addSalonComponent } from './addSalon';
 
 const routes: Routes = [
     { path: 'auth/boxed-lockscreen', component: BoxedLockscreenComponent, data: { title: 'Boxed Lockscreen' } },
@@ -27,6 +29,8 @@ const routes: Routes = [
     { path: 'auth/boxed-signin', component: BoxedSignupComponent, data: { title: 'Boxed Signin' } },
     { path: 'auth/cover-lockscreen', component: CoverLockscreenComponent, data: { title: 'Cover Lockscreen' } },
     { path: 'auth/cover-login', component: CoverLoginComponent, data: { title: 'Cover Login' } },
+
+    { path: 'auth/addSalon', component: addSalonComponent, data: { title: 'addSalon' } },
     {
         path: 'auth/cover-password-reset',
         component: CoverPasswordResetComponent,
@@ -34,8 +38,14 @@ const routes: Routes = [
     },
     { path: 'auth/cover-register', component: CoverRegisterComponent, data: { title: 'Cover Register' } },
 ];
+
 @NgModule({
-    imports: [RouterModule.forChild(routes), CommonModule, SharedModule.forRoot()],
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        SharedModule.forRoot(),
+        ReactiveFormsModule // ✅ Added import for ReactiveFormsModule
+    ],
     declarations: [
         BoxedLockscreenComponent,
         BoxedPasswordResetComponent,
@@ -45,6 +55,7 @@ const routes: Routes = [
         CoverLoginComponent,
         CoverPasswordResetComponent,
         CoverRegisterComponent,
+        addSalonComponent,
     ],
 })
 export class AuthModule {}

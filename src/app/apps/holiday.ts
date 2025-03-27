@@ -40,7 +40,7 @@ export class HolidayComponent {
   }
 
   fetchDataes() {
-    // this.http.get("http://localhost/OPDClinic/read/tbl_holiday").subscribe(
+    // this.http.get("http://localhost/salonClinic/read/tbl_holiday").subscribe(
       this.apiService.get("read/tbl_holiday").subscribe(
       (response: any) => {
         if (response.status === 200) {
@@ -94,7 +94,7 @@ export class HolidayComponent {
 
       // this.http
       //   .post(
-      //     `http://localhost/OPDClinic/update/tbl_holiday/${formData.id}`,
+      //     `http://localhost/salonClinic/update/tbl_holiday/${formData.id}`,
       //     requestBody
       //   )
       //   .subscribe(
@@ -127,7 +127,7 @@ export class HolidayComponent {
       const endpoint = `create/tbl_holiday`;
 
       // this.http
-      //   .post("http://localhost/OPDClinic/create/tbl_holiday", requestBody)
+      //   .post("http://localhost/salonClinic/create/tbl_holiday", requestBody)
       //   .subscribe(
         this.apiService.post(endpoint,requestBody).subscribe(
           (response) => {
@@ -165,7 +165,7 @@ export class HolidayComponent {
 
     // this.http
     //   .post(
-    //     `http://localhost/OPDClinic/delete/tbl_holiday/${formData.id}`,
+    //     `http://localhost/salonClinic/delete/tbl_holiday/${formData.id}`,
     //     requestBody
     //   )
 

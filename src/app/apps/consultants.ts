@@ -32,24 +32,25 @@ export class ConsultantsComponent {
   filterdContactsList: any = [];
   searchUser = "";
   contactList: any[] = []; // Initialize contactList as an empty array
-  sectionsList: any[] = []; // Initialize sectionsList to hold section data
+  servicesList: any[] = []; // Initialize servicesList to hold section data
   isLoading: boolean = false;
   initForm() {
     this.params = this.fb.group({
       id: [0],
       name: ["", Validators.required],
       degree: ["", Validators.required],
-      section: [null, Validators.required], // Set default to null initially
-      role: ["Consultant", Validators.required], // Set default role to "Consultant"
+      role: ["Consultant", Validators.required], // Default role as "Consultant"
       mobile: ["", Validators.required],
       password: ["", Validators.required],
-
+      services: [[], Validators.required], // Ensuring services field is part of the form
     });
   }
+  
 
   ngOnInit() {
     this.initForm();
     this.fetchSections(); // Fetch sections on initialization
+    this.fetchServices(); 
     this.fetchdataes(); // Fetch dataes on initialization
     console.log(this.filterdContactsList); // Log data after fetching it
   }
@@ -59,11 +60,11 @@ export class ConsultantsComponent {
     this.apiService.get("read/tbl_section").subscribe(
       (response: any) => {
         if (response.status === 200) {
-          this.sectionsList = response.data; // Store sections in sectionsList
+          this.servicesList = response.data; // Store sections in servicesList
   
           // Set the default section value to the first section (if available)
-          if (this.sectionsList.length > 0) {
-            this.params.patchValue({ section: this.sectionsList[0].id }); // Set default to first section's id
+          if (this.servicesList.length > 0) {
+            this.params.patchValue({ section: this.servicesList[0].id }); // Set default to first section's id
           }
         } else {
           this.showMessage(response.message, "error");
@@ -72,6 +73,31 @@ export class ConsultantsComponent {
       (error) => {
         console.error("Error fetching sections:", error);
         this.showMessage("Error fetching sections.", "error");
+      }
+    );
+  }
+
+  fetchServices() {
+    // Use ApiService to fetch sections
+    this.apiService.get("read/tbl_servicemst").subscribe(
+      (response: any) => {
+        if (response.status === 200) {
+          console.log("Services List:", response);
+          this.servicesList = response.data; // Store sections in servicesList
+          console.log("Services List (Extracted Data):", this.servicesList);
+
+  
+          // Set the default section value to the first section (if available)
+          if (this.servicesList.length > 0) {
+            this.params.patchValue({ section: this.servicesList[0].id }); // Set default to first section's id
+          }
+        } else {
+          this.showMessage(response.message, "error");
+        }
+      },
+      (error) => {
+        console.error("Error fetching services:", error);
+        this.showMessage("Error fetching services.", "error");
       }
     );
   }
@@ -117,8 +143,9 @@ export class ConsultantsComponent {
         name: user.name,
         mobile: user.mobile,
         degree: user.degree,
-        section: user.section, // Make sure section ID matches one in sectionsList
+        section: user.section, // Make sure section ID matches one in servicesList
         role: user.role, 
+        services: [[]], // Stores selected service IDs as an array
         // password: user.password,
       });
     } else {
@@ -141,11 +168,10 @@ export class ConsultantsComponent {
       name: formData.name,
       mobile: formData.mobile,
       degree: formData.degree,
-      section: formData.section,
       role: formData.role,
       password: formData.password,
+      services: formData.services, // Ensure services are passed in the API request
     };
-
     if (formData.id) {
       const endpoint = `createcunsltant/tbl_register/${formData.id}`;
 
@@ -153,7 +179,7 @@ export class ConsultantsComponent {
       // Update user in the API using the con_id
       // this.http
       //   .post<ApiResponse>( // Specify the expected response type
-      //     `http://localhost/OPDClinic/createcunsltant/tbl_register/${formData.id}`,
+      //     `http://localhost/salonClinic/createcunsltant/tbl_register/${formData.id}`,
       //     requestBody
       //   )
       //   .subscribe(
@@ -184,12 +210,12 @@ export class ConsultantsComponent {
           }
         );
     } else {
-      const endpoint = `createcunsltant/tbl_register/${formData.id}`;
+      const endpoint = `createcunsltant/tbl_consultants/${formData.id}`;
 
       // Add user to the API
       // this.http
       //   .post<ApiResponse>( // Specify the expected response type
-      //     `http://localhost/OPDClinic/createcunsltant/tbl_register/${formData.id}`,
+      //     `http://localhost/salonClinic/createcunsltant/tbl_register/${formData.id}`,
       //     requestBody
       //   )
         this.apiService.post(endpoint,requestBody).subscribe(
@@ -203,7 +229,7 @@ export class ConsultantsComponent {
                 : 1,
               name: formData.name,
               degree: formData.degree,
-              section: formData.section,
+              services: formData.services,
               role: formData.role,
               mobile: formData.mobile,
               password : formData.password,
@@ -253,6 +279,20 @@ export class ConsultantsComponent {
       }
     );
   }
+
+  toggleServiceSelection(serviceId: number) {
+    const selectedServices = this.params.controls['services'].value as number[];
+  
+    if (selectedServices.includes(serviceId)) {
+      this.params.controls['services'].setValue(
+        selectedServices.filter(id => id !== serviceId)
+      );
+    } else {
+      this.params.controls['services'].setValue([...selectedServices, serviceId]);
+    }
+  }
+  
+  
   
   showMessage(msg = "", type = "success") {
     const toast: any = Swal.mixin({

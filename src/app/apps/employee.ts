@@ -88,7 +88,7 @@ export class EmployeeComponent {
 
   fetchAccessLevels() {
     this.apiService.get("read/tbl_menu").subscribe(
-    // this.http.get("http://localhost/OPDClinic/read/tbl_menu").subscribe(
+    // this.http.get("http://localhost/salonClinic/read/tbl_menu").subscribe(
       (response: any) => {
         if (response.status === 200) {
           this.accessLevelsList = response.data.map((menu: any) => ({
@@ -120,7 +120,7 @@ export class EmployeeComponent {
   }
   
   fetchSections() {
-    // this.http.get("http://localhost/OPDClinic/read/tbl_section").subscribe(
+    // this.http.get("http://localhost/salonClinic/read/tbl_section").subscribe(
       this.apiService.get("read/tbl_section").subscribe(
       (response: any) => {
         if (response.status === 200) {
@@ -143,7 +143,7 @@ export class EmployeeComponent {
   fetchDataes() {
     this.http
     this.apiService.get("getempy/tbl_register").subscribe(
-      // .get("http://localhost/OPDClinic/getempy/tbl_register").subscribe(
+      // .get("http://localhost/salonClinic/getempy/tbl_register").subscribe(
         (response: any) => {
           if (response.status === 200) {
             this.contactList = response.data;
@@ -195,7 +195,7 @@ export class EmployeeComponent {
       this.onRoleChange(user.role); // Ensure the role change updates the access levels
 
       // Check if the user has an existing resume and add the full path for display
-      // this.previousResumeUrl = user.resume? `http://localhost/OPDClinic/public/assets/resume/${user.resume}`: null;
+      // this.previousResumeUrl = user.resume? `http://localhost/salonClinic/public/assets/resume/${user.resume}`: null;
       const baseUrl = this.apiService.getBaseUrl();
       this.previousResumeUrl = user.resume? `${baseUrl}/public/assets/resume/${user.resume}`: null;
       // Populate access level checkboxes based on the user data
@@ -268,8 +268,8 @@ export class EmployeeComponent {
     const baseUrl = this.apiService.getBaseUrl();
 
     // const apiUrl = this.params.get("id")?.value
-    //   ? `http://localhost/OPDClinic/createemp/tbl_register/${this.params.get("id")?.value}`
-    //   : "http://localhost/OPDClinic/createemp/tbl_register";
+    //   ? `http://localhost/salonClinic/createemp/tbl_register/${this.params.get("id")?.value}`
+    //   : "http://localhost/salonClinic/createemp/tbl_register";
 
     // // Handle post request for add or update
     // this.http.post(apiUrl, formData).subscribe(
@@ -304,7 +304,7 @@ export class EmployeeComponent {
 
   deleteUser(formData: any) {
     this.apiService.post(`delete/tbl_register/${formData.id}`, {}).subscribe(
-    // this.http.post(`http://localhost/OPDClinic/delete/tbl_register/${formData.id}`,{}).subscribe(
+    // this.http.post(`http://localhost/salonClinic/delete/tbl_register/${formData.id}`,{}).subscribe(
         (response) => {
           console.log("Delete response:", response);
           this.contactList = this.contactList.filter(

@@ -37,6 +37,7 @@ export class BookAppointmentComponent {
   showSubscription: boolean = false; // Flag to show/hide subscription options
   activeTab5 = 1; // Used for managing the active tab for weekdays
   isLoading: boolean = false;
+  selectedServices: number[] = [];
 
   previousSection: string | null = null;
 
@@ -167,6 +168,15 @@ export class BookAppointmentComponent {
   //   }
   // }
 
+  onServiceSelectionChange(serviceId: number) {
+    if (this.selectedServices.includes(serviceId)) {
+      this.selectedServices = this.selectedServices.filter(id => id !== serviceId);
+    } else {
+      this.selectedServices.push(serviceId);
+    }
+    this.appointmentForm.patchValue({ section: this.selectedServices });
+  }
+
   isSectionValid(): boolean {
     if (this.activeTab5 === 1) {
       // Validate Slot Selection (1st Section)
@@ -219,7 +229,7 @@ export class BookAppointmentComponent {
 
   fetchBranches() {
     this.apiService.get("read/tbl_branch").subscribe(
-  //  this.http.get<any>("http://localhost/OPDClinic/read/tbl_branch").subscribe(
+  //  this.http.get<any>("http://localhost/salonClinic/read/tbl_branch").subscribe(
         (response) => {
           if (response.status === 200) {
             this.branches = response.data; // Assign the fetched branches
@@ -237,7 +247,7 @@ export class BookAppointmentComponent {
     const role = "Consultant"; // Define the role you want to filter by
     const endpoint = `get_where_condition_data/tbl_register/${role}`;
     this.apiService.get(endpoint).subscribe(
-    // this.http.get<any>(`http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
+    // this.http.get<any>(`http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
         (response) => {
           if (response.status === 200) {
             this.consultants = response.data; // Assign the fetched consultants
@@ -253,7 +263,7 @@ export class BookAppointmentComponent {
 
   fetchSections() {
     this.apiService.get("read/tbl_section").subscribe(
-    // this.http.get("http://localhost/OPDClinic/read/tbl_section").subscribe(
+    // this.http.get("http://localhost/salonClinic/read/tbl_section").subscribe(
       (response: any) => {
         if (response.status === 200) {
           this.sectionsList = response.data; // Store sections in sectionsList
@@ -435,7 +445,7 @@ export class BookAppointmentComponent {
     const endpoint = `fetchslotsforcustome`; // Only the relative endpoint
     const headers = { "Content-Type": "application/json" };
     this.apiService.post(endpoint, payload, { headers }).subscribe(
-  // this.http.post<any>("http://localhost/OPDClinic/fetchslotsforcustome",payload,{headers: {"Content-Type": "application/json",},}).subscribe(
+  // this.http.post<any>("http://localhost/salonClinic/fetchslotsforcustome",payload,{headers: {"Content-Type": "application/json",},}).subscribe(
         (response) => {
           // console.log("Response from server:", response);
           this.isLoading = false;
@@ -504,7 +514,7 @@ export class BookAppointmentComponent {
 
     const endpoint = `subscribtionappointment`;
     this.apiService.post(endpoint,payload).subscribe(
-    // this.http.post<any>("http://localhost/OPDClinic/subscribtionappointment",payload).subscribe(
+    // this.http.post<any>("http://localhost/salonClinic/subscribtionappointment",payload).subscribe(
         (response) => {
           console.log("Response from server:", response);
 
@@ -534,7 +544,7 @@ export class BookAppointmentComponent {
       const endpoint = `fetchslots`; // Only the relative endpoint
       const headers = { "Content-Type": "application/json" };
       this.apiService.post(endpoint, payload, { headers }).subscribe(
-    //  this.http.post<any>("http://localhost/OPDClinic/fetchslots", payload, {headers: {"Content-Type": "application/json",},}).subscribe(
+    //  this.http.post<any>("http://localhost/salonClinic/fetchslots", payload, {headers: {"Content-Type": "application/json",},}).subscribe(
         (response) => {
           console.log("Response from server:", response);
 
@@ -587,7 +597,7 @@ export class BookAppointmentComponent {
 
       const endpoint = `submitappointment`;
       this.apiService.post(endpoint,formData).subscribe(
-      // this.http.post("http://localhost/OPDClinic/submitappointment", formData).subscribe(
+      // this.http.post("http://localhost/salonClinic/submitappointment", formData).subscribe(
           (response) => {
             console.log("Form submitted successfully:", response);
             this.showMessage("Appointment booked successfully!", "success");
@@ -616,7 +626,7 @@ export class BookAppointmentComponent {
     this.isLoading = true; // Set loading to true when starting the request
     const endpoint = `submitappointments`;
     this.apiService.post(endpoint,formData).subscribe(
-    // this.http.post("http://localhost/OPDClinic/submitappointments", formData).subscribe(
+    // this.http.post("http://localhost/salonClinic/submitappointments", formData).subscribe(
         (response) => {
           console.log("Custom appointment booked successfully:", response);
           this.showMessage(
