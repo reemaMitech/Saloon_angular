@@ -31,8 +31,12 @@ export class BranchComponent implements OnInit {
       id: [0],
       branch_name: ["", Validators.required],
       address: ["", Validators.required],
+      stylists: [0, [Validators.required, Validators.min(0)]], // New field
+      chairs: [0, [Validators.required, Validators.min(0)]], // New field
+      beds: [0, [Validators.required, Validators.min(0)]] // New field
     });
   }
+  
 
   ngOnInit() {
     this.initForm();
@@ -40,7 +44,7 @@ export class BranchComponent implements OnInit {
   }
 
   fetchBranches() {
-    // this.http.get(`http://localhost/OPDClinic/read/tbl_branch`).subscribe(
+    // this.http.get(`http://localhost/salonClinic/read/tbl_branch`).subscribe(
       this.apiService.get("read/tbl_branch").subscribe(
 
       (response: any) => {
@@ -90,7 +94,7 @@ export class BranchComponent implements OnInit {
 
   //   if (formData.id) {
   //     // Update user in the API
-  //     this.http.post(`http://localhost/OPDClinic/update/tbl_branch/${formData.id}`, requestBody).subscribe(
+  //     this.http.post(`http://localhost/salonClinic/update/tbl_branch/${formData.id}`, requestBody).subscribe(
   //       (response) => {
   //         console.log("Update response:", response);
   //         let user: any = this.contactList.find((d) => d.id === formData.id);
@@ -108,7 +112,7 @@ export class BranchComponent implements OnInit {
   //     );
   //   } else {
   //     // Add user to the API
-  //     this.http.post('http://localhost/OPDClinic/create/tbl_branch', requestBody).subscribe(
+  //     this.http.post('http://localhost/salonClinic/create/tbl_branch', requestBody).subscribe(
   //       (response) => {
   //         console.log("Create response:", response);
   //         let newUser = {
@@ -133,78 +137,82 @@ export class BranchComponent implements OnInit {
       this.showMessage("Please fill all required fields.", "error");
       return;
     }
-
+  
     this.isLoading = true; // Set loading to true when starting the request
-
+  
     const formData = this.params.value;
     const requestBody = {
       branch_name: formData.branch_name,
       address: formData.address,
+      stylists: formData.stylists, // New field
+      chairs: formData.chairs, // New field
+      beds: formData.beds, // New field
     };
-
+  
     if (formData.id) {
-      // Update user in the API
-      // this.http.post(`http://localhost/OPDClinic/update/tbl_branch/${formData.id}`,requestBody).subscribe(
-        const endpoint = `update/tbl_branch/${formData.id}`;
-        this.apiService.post(endpoint,requestBody).subscribe(
-
+      // Update branch in the API
+      const endpoint = `update/tbl_branch/${formData.id}`;
+      this.apiService.post(endpoint, requestBody).subscribe(
         (response) => {
-            this.isLoading = false; // Reset loading state
-            console.log("Update response:", response);
-            let user: any = this.contactList.find((d) => d.id === formData.id);
-            if (user) {
-              user.branch_name = formData.branch_name;
-              user.address = formData.address;
-            }
-            this.showMessage("Branch has been updated successfully.");
-            this.fetchBranches();
-
-            this.addContactModal.close();
-          },
-          (error) => {
-            this.isLoading = false; // Reset loading state in case of error
-            console.error("Error updating branch:", error);
-            this.showMessage("Error updating branch.", "error");
+          this.isLoading = false; // Reset loading state
+          console.log("Update response:", response);
+          let branch: any = this.contactList.find((d) => d.id === formData.id);
+          if (branch) {
+            branch.branch_name = formData.branch_name;
+            branch.address = formData.address;
+            branch.stylists = formData.stylists; // Assign new field
+            branch.chairs = formData.chairs; // Assign new field
+            branch.beds = formData.beds; // Assign new field
           }
-        );
+          this.showMessage("Branch has been updated successfully.");
+          this.fetchBranches();
+          this.addContactModal.close();
+        },
+        (error) => {
+          this.isLoading = false; // Reset loading state in case of error
+          console.error("Error updating branch:", error);
+          this.showMessage("Error updating branch.", "error");
+        }
+      );
     } else {
-      // Add user to the API
-    
-      // this.http.post("http://localhost/OPDClinic/create/tbl_branch", requestBody).subscribe(
-        const endpoint = `create/tbl_branch`;
-        this.apiService.post(endpoint,requestBody).subscribe(
-
+      // Add branch to the API
+      const endpoint = `create/tbl_branch`;
+      this.apiService.post(endpoint, requestBody).subscribe(
         (response) => {
-            this.isLoading = false; // Reset loading state
-            console.log("Create response:", response);
-            let newUser = {
-              id: this.contactList.length
-                ? Math.max(...this.contactList.map((u) => u.id)) + 1
-                : 1,
-              branch_name: formData.branch_name,
-              address: formData.address,
-            };
-            this.contactList.unshift(newUser);
-            this.searchContacts();
-            this.fetchBranches();
-
-            this.showMessage("Branch has been saved successfully.");
-            this.addContactModal.close();
-          },
-          (error) => {
-            this.isLoading = false; // Reset loading state in case of error
-            console.error("Error saving branch:", error);
-            this.showMessage("Error saving branch.", "error");
-          }
-        );
+          this.isLoading = false; // Reset loading state
+          console.log("Create response:", response);
+          let newBranch = {
+            id: this.contactList.length
+              ? Math.max(...this.contactList.map((b) => b.id)) + 1
+              : 1,
+            branch_name: formData.branch_name,
+            address: formData.address,
+            stylists: formData.stylists, // Assign new field
+            chairs: formData.chairs, // Assign new field
+            beds: formData.beds, // Assign new field
+          };
+          this.contactList.unshift(newBranch);
+          this.searchContacts();
+          this.fetchBranches();
+  
+          this.showMessage("Branch has been saved successfully.");
+          this.addContactModal.close();
+        },
+        (error) => {
+          this.isLoading = false; // Reset loading state in case of error
+          console.error("Error saving branch:", error);
+          this.showMessage("Error saving branch.", "error");
+        }
+      );
     }
   }
+  
 
   deleteUser(formData: any) {
     const requestBody = {};
     const endpoint = `delete/tbl_branch/${formData.id}`;
     this.apiService.post(endpoint,requestBody).subscribe(
-    // this.http.post(`http://localhost/OPDClinic/delete/tbl_branch/${formData.id}`,requestBody).subscribe(
+    // this.http.post(`http://localhost/salonClinic/delete/tbl_branch/${formData.id}`,requestBody).subscribe(
         (response) => {
           console.log("Delete response:", response);
           this.contactList = this.contactList.filter(

@@ -134,7 +134,7 @@ export class CalendarComponent implements OnInit {
 //   getEvents() {
 //     // Fetch event data from API
 //     this.apiService.get("readAppointments").subscribe(
-// //  this.http.get<any>("http://localhost/OPDClinic/readAppointments").subscribe(
+// //  this.http.get<any>("http://localhost/salonClinic/readAppointments").subscribe(
 //     (response: any) => {
 //         if (response.status === 200) {
 //           this.calendarOptions.events = response.data.map((event: any) => {

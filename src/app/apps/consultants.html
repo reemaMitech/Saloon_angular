@@ -353,23 +353,23 @@
           />
         </div>
         <div class="mb-5">
-          <label for="degree">Degree  <span class="text-red-500">*</span></label>
+          <label for="degree">Qualification  <span class="text-red-500">*</span></label>
           <input
             id="degree"
             type="text"
-            placeholder="Enter Degree"
+            placeholder="Enter Qualification"
             class="form-input"
             formControlName="degree"
           />
         </div>
-        <div class="mb-5">
+        <!-- <div class="mb-5">
           <label for="section" class="block text-sm font-medium text-gray-700">
             Section <span class="text-red-500">*</span>
           </label>
         
-          <!-- Dropdown Wrapper -->
+       
           <div class="relative mt-1">
-            <!-- Select Dropdown -->
+           
             <select
               id="section"
               class="form-input block w-full border border-gray-300 rounded-md p-2 pr-10 bg-white text-sm shadow-sm appearance-none "
@@ -380,14 +380,37 @@
               </option>
             </select>
         
-            <!-- Custom Dropdown Icon -->
+            
             <span
               class="absolute inset-y-0 right-3 flex items-center text-gray-500 pointer-events-none"
             >
               ▼
             </span>
           </div>
+        </div> -->
+
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-gray-700">
+            Services <span class="text-red-500">*</span>
+          </label>
+        
+          <div class="grid grid-cols-3 gap-4 mt-2"> 
+            <div *ngFor="let service of servicesList" class="flex items-center space-x-2">
+              <input 
+                type="checkbox" 
+                [value]="service.id" 
+                (change)="toggleServiceSelection(service.id)" 
+                [checked]="params.controls['services']?.value?.includes(service.id)"
+                class="form-checkbox text-primary-600 focus:ring-primary-500 w-4 h-4"
+              />
+              <label class="text-sm text-gray-700">{{ service.name }}</label>
+            </div>
+          </div>
         </div>
+        
+        
+
+
         <div class="mb-5">
           <label for="mobile">mobile Number <span class="text-red-500">*</span></label>
           <input

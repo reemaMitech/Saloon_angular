@@ -357,7 +357,7 @@ export class ConsultantsdashboardComponent {
     const role = "Consultant"; // Define the role you want to filter by
     // this.http
     //   .get<any>(
-    //     `http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`
+    //     `http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`
     //   )
     //   .subscribe(
       const endpoint = `get_where_condition_data/tbl_register/${role}`;
@@ -872,7 +872,7 @@ export class ConsultantsdashboardComponent {
 
   //   this.http
   //     .post(
-  //       `http://localhost/OPDClinic/canceledshedule/tbl_appointment/${formData.id}`,
+  //       `http://localhost/salonClinic/canceledshedule/tbl_appointment/${formData.id}`,
   //       requestBody
   //     )
   //     .subscribe(

@@ -32,7 +32,7 @@
         <ul class="relative space-y-0.5 p-4 py-0 font-semibold">
           <li class="nav-item" *ngIf="user.role == 'Admin' || user.role == 'Employee' ">
             <a
-              routerLink="Lading-Page"
+              routerLink="Landing-Page"
               class="group"
               routerLinkActive="active"
               (click)="toggleMobileMenu()"
@@ -129,6 +129,16 @@
                     {{ 'Branch' | translate }}
                   </a>
                 </li>
+
+                <li *ngIf="hasAccess('3')">
+                  <a
+                    routerLink="/apps/Chair"
+                    routerLinkActive="active"
+                    (click)="toggleMobileMenu()"
+                  >
+                    {{ 'Chair' | translate }}
+                  </a>
+                </li>
                 <!-- <li *ngIf="hasAccess('2')">
                   <a
                     routerLink="/apps/Health-and-Wellness-Services"
@@ -196,21 +206,21 @@
                   </a>
                 </li> -->
 
-                <li *ngIf="hasAccess('13')">
+                <!-- <li *ngIf="hasAccess('13')">
                   <a
                     routerLink="/apps/RadiologyTest"
                     routerLinkActive="active"
                     (click)="toggleMobileMenu()"
                     >{{ 'RadiologyTest' | translate }}</a
                   >
-                </li>
+                </li> -->
 
                 <li *ngIf="hasAccess('14')">
                   <a
-                    routerLink="/apps/LabTest"
+                    routerLink="/apps/Service"
                     routerLinkActive="active"
                     (click)="toggleMobileMenu()"
-                    >{{ 'LabTest' | translate }}</a
+                    >{{ 'Service' | translate }}</a
                   >
                 </li>
               </ul>
@@ -255,7 +265,7 @@
             </a>
           </li> -->
 
-          <li class="menu nav-item" *ngIf="hasAccess('15')">
+          <!-- <li class="menu nav-item" *ngIf="hasAccess('15')">
             <a
               routerLink="/appointment-form"
               class="nav-link group"
@@ -271,7 +281,7 @@
                 </span>
               </div>
             </a>
-          </li>
+          </li> -->
 
           <li class="menu nav-item" *ngIf="hasAccess('9')">
             <a

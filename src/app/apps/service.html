@@ -1,0 +1,269 @@
+<div>
+  <div class="flex flex-wrap items-center gap-4">
+    <h2 class="text-xl">Service</h2>
+
+    <a class="btn btn-primary gap-2 add_schedule" (click)="editService()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24px"
+        height="24px"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-5 w-5"
+      >
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </a>
+
+    <div
+      class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3 ml-auto"
+    >
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search Service"
+          class="peer form-input py-2 ltr:pr-11 rtl:pl-11"
+          [(ngModel)]="searchUser"
+          name="searchUser"
+          (ngModelChange)="searchContacts()"
+        />
+        <div
+          class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]"
+        >
+          <icon-search class="mx-auto" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mt-5 overflow-hidden border-0 p-0 tablesize">
+    <ng-container *ngIf="displayType === 'list'">
+      <div class="table-responsive">
+        <table class="table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Duration <br>(min)</th>
+              <th>Buffer Time <br>(min)</th>
+              <th class="!text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let service of servicemst; let i = index">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price }}</td>
+                <td>{{ service.duration }}</td>
+                <td>{{ service.bufferTime }}</td>
+                <td>
+                  <div class="flex items-center justify-center gap-4">
+                    <a
+                      routerlink="/apps/todolist"
+                      (click)="editService(service)"
+                      class="cursor-pointer block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
+                    >
+                      <!-- Edit Icon -->
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          opacity="0.5"
+                          d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        ></path>
+                        <path
+                          d="M17.3 2.8L16.65 3.45L10.68 9.42C10.28 9.82 10.08 10.03 9.91 10.25C9.7 10.51 9.53 10.8 9.38 11.1C9.26 11.35 9.17 11.62 8.99 12.16L8.41 13.9L8.04 15.02C7.95 15.29 8.02 15.58 8.22 15.78C8.42 15.98 8.71 16.05 8.98 15.96L10.1 15.59L11.83 15.01C12.38 14.83 12.65 14.74 12.9 14.62C13.2 14.47 13.49 14.3 13.75 14.09C13.97 13.92 14.18 13.72 14.58 13.31L20.54 7.35L21.19 6.7C22.27 5.62 22.27 3.88 21.19 2.8C20.12 1.73 18.38 1.73 17.3 2.8Z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                        ></path>
+                      </svg>
+                    </a>
+    
+                    <a (click)="deleteService(service)" class="cursor-pointer">
+                      <!-- Delete Icon -->
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-danger"
+                      >
+                        <path
+                          d="M20.5 6H3.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        ></path>
+                        <path
+                          d="M18.83 8.5L18.37 15.4C18.2 18.05 18.1 19.38 17.24 20.19C16.38 21 15.05 21 12.39 21H11.61C8.95 21 7.62 21 6.76 20.19C5.89 19.38 5.8 18.05 5.63 15.4L5.17 8.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+    
+  </div>
+
+  <!--Add Health and Wellness Services modal -->
+  <ngx-custom-modal #addContactModal class="no-footer">
+    <ng-template #modalHeader>
+      <div class="!font-medium">
+        {{ params.controls['id'].value ? 'Edit Service' : 'Add Service' }}
+      </div>
+    </ng-template>
+    <ng-template #modalBody>
+      <div class="text-sm text-gray-500 mb-4">
+        Fields with <span class="text-red-500">*</span> are mandatory.
+      </div>
+      <form
+        [formGroup]="params"
+        class="text-sm"
+        (ngSubmit)="saveService()"
+        ngNativeValidate
+      >
+        <div class="mb-5">
+          <label for="name">Service Title  <span class="text-red-500">*</span></label>
+          <input
+            id="name"
+            type="text"
+            class="form-input"
+            formControlName="name"
+          />
+        </div>
+
+        <div class="mb-5">
+          <label for="duration">Service Duration  <span class="text-red-500">*</span></label>
+          <input
+            id="duration"
+            type="text"
+            placeholder="Duration required for this service"
+            class="form-input"
+            formControlName="duration"
+          />
+        </div>
+
+        <div class="mb-5">
+          <label for="bufferTime" class="mr-2">
+            Buffer Time:<span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <select formControlName="bufferTime" id="bufferTime" class="form-input w-full pr-10 appearance-none">
+              <option value="0">0 minutes</option>
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-500 pointer-events-none">▼</span>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <label class="mr-2">Need Repetition? <span class="text-red-500">*</span></label>
+          <div class="flex items-center">
+            <label class="mr-4">
+              <input
+                type="radio"
+                formControlName="needRepetition"
+                [value]="'yes'"
+                (change)="onRepetitionChange('yes')"
+              />
+              Yes
+            </label>
+            <label>
+              <input
+                type="radio"
+                formControlName="needRepetition"
+                [value]="'no'"
+                (change)="onRepetitionChange('no')"
+              />
+              No
+            </label>
+          </div>
+        </div>
+        
+        
+        <!-- Repetition Frequency Dropdown (Hidden by Default) -->
+        <div class="mb-5" *ngIf="params.get('needRepetition')?.value === 'yes'">
+          <label for="repetitionFrequency">Select Repetition Frequency:</label>
+          <div class="relative">
+            <select
+              formControlName="repetitionFrequency"
+              id="repetitionFrequency"
+              class="form-input w-full pr-10 appearance-none"
+            >
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="biweekly">Biweekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-500 pointer-events-none">▼</span>
+          </div>
+        </div>
+        
+        
+        <div class="mb-5">
+          <label for="price">Session Price:<span class="text-red-500">*</span></label>
+          <input formControlName="price" id="price" placeholder="Session price per person per service" class="form-input w-full"/>
+        </div>
+
+        <!-- <div class="mb-5">
+          <label for="slotcount" class="mr-2">
+            Select No of Customer per Slot:<span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <select formControlName="slotcount" id="slotcount" class="form-input w-full pr-10 appearance-none">
+            <option value="1">1 </option>
+                  <option value="2">2 </option>
+                  <option value="3">3 </option>
+                  <option value="4">4 </option>
+                  <option value="5">5 </option>
+                  <option value="6">6 </option>
+            </select>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-500 pointer-events-none">▼</span>
+          </div>
+        </div> -->
+        
+      
+
+        <div class="mt-8 flex items-center justify-end">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="addContactModal.close()"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">
+            {{ params.controls['id'].value ? 'Update' : 'Add' }}
+          </button>
+        </div>
+      </form>
+    </ng-template>
+  </ngx-custom-modal>
+</div>

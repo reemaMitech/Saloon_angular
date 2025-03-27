@@ -42,7 +42,7 @@ export class AddclinicComponent implements OnInit {
   }
 
   fetchClinics() {
-    // this.http.get(`http://localhost/OPDClinic/read/tbl_opdproductkey`).subscribe(
+    // this.http.get(`http://localhost/salonClinic/read/tbl_opdproductkey`).subscribe(
       this.apiService.get("read/tbl_opdproductkey").subscribe(
 
       (response: any) => {
@@ -99,7 +99,7 @@ export class AddclinicComponent implements OnInit {
 
     if (formData.id) {
       // Update user in the API
-      // this.http.post(`http://localhost/OPDClinic/update/tbl_opdproductkey/${formData.id}`,requestBody).subscribe(
+      // this.http.post(`http://localhost/salonClinic/update/tbl_opdproductkey/${formData.id}`,requestBody).subscribe(
         const endpoint = `update/tbl_opdproductkey/${formData.id}`;
         this.apiService.post(endpoint,requestBody).subscribe(
 
@@ -127,7 +127,7 @@ export class AddclinicComponent implements OnInit {
     } else {
       // Add user to the API
     
-      // this.http.post("http://localhost/OPDClinic/create/tbl_opdproductkey", requestBody).subscribe(
+      // this.http.post("http://localhost/salonClinic/create/tbl_opdproductkey", requestBody).subscribe(
         const endpoint = `create/tbl_opdproductkey`;
         this.apiService.post(endpoint,requestBody).subscribe(
 
@@ -163,7 +163,7 @@ export class AddclinicComponent implements OnInit {
     const requestBody = {};
     const endpoint = `delete/tbl_opdproductkey/${formData.id}`;
     this.apiService.post(endpoint,requestBody).subscribe(
-    // this.http.post(`http://localhost/OPDClinic/delete/tbl_opdproductkey/${formData.id}`,requestBody).subscribe(
+    // this.http.post(`http://localhost/salonClinic/delete/tbl_opdproductkey/${formData.id}`,requestBody).subscribe(
         (response) => {
           console.log("Delete response:", response);
           this.contactList = this.contactList.filter(

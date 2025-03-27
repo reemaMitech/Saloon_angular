@@ -37,7 +37,7 @@ export class MenuComponent implements OnInit {
   }
 
   fetchMenus() {
-    this.http.get("http://localhost/OPDClinic/read/tbl_menu").subscribe(
+    this.http.get("http://localhost/salonClinic/read/tbl_menu").subscribe(
       (response: any) => {
         if (response.status === 200) {
           this.contactList = response.data; // Assign data to contactList
@@ -89,7 +89,7 @@ export class MenuComponent implements OnInit {
       // Update user in the API
       this.http
         .post(
-          `http://localhost/OPDClinic/update/tbl_menu/${formData.id}`,
+          `http://localhost/salonClinic/update/tbl_menu/${formData.id}`,
           requestBody
         )
         .subscribe(
@@ -114,7 +114,7 @@ export class MenuComponent implements OnInit {
     } else {
       // Add user to the API
       this.http
-        .post("http://localhost/OPDClinic/create/tbl_menu", requestBody)
+        .post("http://localhost/salonClinic/create/tbl_menu", requestBody)
         .subscribe(
           (response) => {
             this.isLoading = false;
@@ -146,7 +146,7 @@ export class MenuComponent implements OnInit {
 
     this.http
       .post(
-        `http://localhost/OPDClinic/delete/tbl_menu/${formData.id}`,
+        `http://localhost/salonClinic/delete/tbl_menu/${formData.id}`,
         requestBody
       )
       .subscribe(

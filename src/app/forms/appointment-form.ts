@@ -90,10 +90,7 @@ export class AppointmentFormComponent {
           Validators.pattern("^[a-zA-Z ]+$"), // Only letters and spaces
         ],
       ],
-      age: [
-        "",
-        [Validators.required, Validators.pattern("^[0-9]*$")], // Only numeric values
-      ],
+      gender: ['', Validators.required],
       mobile_no: [
         "",
         [
@@ -211,7 +208,7 @@ export class AppointmentFormComponent {
 
   fetchBranches() {
     this.http
-      .get<any>("http://localhost/OPDClinic/read/tbl_branch")
+      .get<any>("http://localhost/salonClinic/read/tbl_branch")
       .subscribe(
         (response) => {
           if (response.status === 200) {
@@ -230,7 +227,7 @@ export class AppointmentFormComponent {
     const role = "Consultant"; // Define the role you want to filter by
     this.http
       .get<any>(
-        `http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`
+        `http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`
       )
       .subscribe(
         (response) => {
@@ -247,7 +244,7 @@ export class AppointmentFormComponent {
   }
 
   fetchSections() {
-    this.http.get("http://localhost/OPDClinic/read/tbl_section").subscribe(
+    this.http.get("http://localhost/salonClinic/read/tbl_section").subscribe(
       (response: any) => {
         if (response.status === 200) {
           this.sectionsList = response.data; // Store sections in sectionsList
@@ -368,7 +365,7 @@ export class AppointmentFormComponent {
     // Proceed with the API call if all required fields are present
     this.http
       .post<any>(
-        "http://localhost/OPDClinic/fetchslotsforcustome",
+        "http://localhost/salonClinic/fetchslotsforcustome",
         payload,
         {
           headers: {
@@ -445,7 +442,7 @@ export class AppointmentFormComponent {
 
     this.http
       .post<any>(
-        "http://localhost/OPDClinic/subscribtionappointment",
+        "http://localhost/salonClinic/subscribtionappointment",
         payload
       )
       .subscribe(
@@ -477,7 +474,7 @@ export class AppointmentFormComponent {
     this.isLoading = true;
 
     this.http
-      .post<any>("http://localhost/OPDClinic/fetchslots", payload, {
+      .post<any>("http://localhost/salonClinic/fetchslots", payload, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -534,7 +531,7 @@ export class AppointmentFormComponent {
       // Otherwise, submit the form data as usual
 
       this.http
-        .post("http://localhost/OPDClinic/submitappointment", formData)
+        .post("http://localhost/salonClinic/submitappointment", formData)
         .subscribe(
           (response) => {
             console.log("Form submitted successfully:", response);
@@ -564,7 +561,7 @@ export class AppointmentFormComponent {
     this.isLoading = true; // Set loading to true when starting the request
 
     this.http
-      .post("http://localhost/OPDClinic/submitappointments", formData)
+      .post("http://localhost/salonClinic/submitappointments", formData)
       .subscribe(
         (response) => {
           console.log("Custom appointment booked successfully:", response);

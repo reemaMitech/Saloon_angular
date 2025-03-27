@@ -12,7 +12,7 @@
         </li> -->
   </ul>
   <div class="mb-5 flex items-center font-bold">
-    <span class="text-lg">Lading Page</span>
+    <span class="text-lg">Landing Page</span>
     <!-- <a
       href="javascript:;"
       class="text-primary hover:text-black ltr:ml-auto rtl:mr-auto dark:hover:text-white-dark"
@@ -802,13 +802,13 @@
                     <th class="px-4 py-2">Sr. No.</th>
                     <th class="px-4 py-2">Branch</th>
                     <th class="px-4 py-2">Service</th>
-                    <th class="px-4 py-2">Stylist</th>
+                    <!-- <th class="px-4 py-2">Stylist</th> -->
                     <th class="px-4 py-2">Customer</th>
                     <th class="px-4 py-2">Mobile No</th>
                     <th class="px-4 py-2">Date</th>
                     <th class="px-4 py-2">Slot</th>
-                    <th class="px-4 py-2">Fee</th>
-                    <th class="px-4 py-2 text-center">Payment Status</th>
+                    <!-- <th class="px-4 py-2">Fee</th> -->
+                    <!-- <th class="px-4 py-2 text-center">Payment Status</th> -->
                     <th class="px-4 py-2 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -826,9 +826,9 @@
                       <td class="px-4 py-2 whitespace-nowrap">
                         {{ conducted.section_name }}
                       </td>
-                      <td class="px-4 py-2 whitespace-nowrap">
+                      <!-- <td class="px-4 py-2 whitespace-nowrap">
                         {{ conducted.consultant_name }}
-                      </td>
+                      </td> -->
                       <td class="px-4 py-2 whitespace-nowrap">
                         {{ conducted.full_name }}
                       </td>
@@ -841,7 +841,7 @@
                       </td>
                       <td class="px-4 py-2">{{ conducted.Price }}</td>
 
-                      <td class="px-4 py-2 text-center">
+                      <!-- <td class="px-4 py-2 text-center">
                         <small
                           class="badge inline-flex items-center justify-center w-20 h-6 text-center rounded-md"
                           [ngClass]="conducted.payment_status === 'P' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'"
@@ -849,7 +849,7 @@
                           {{ conducted.payment_status === 'P' ? 'Paid' :
                           'Unpaid' }}
                         </small>
-                      </td>
+                      </td> -->
                       <td class="px-4 py-2 text-center">
                         <div class="flex justify-center space-x-2">
                           <button

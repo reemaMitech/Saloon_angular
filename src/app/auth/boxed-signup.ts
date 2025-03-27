@@ -68,7 +68,7 @@ export class BoxedSignupComponent implements OnInit, OnDestroy {
   //     return;
   //   }
 
-  //   const apiUrl = "http://localhost/OPDClinic/authenticate";
+  //   const apiUrl = "http://localhost/salonClinic/authenticate";
   //   const loginData = { mobile: this.mobile, password: this.password };
 
   //   this.http.post(apiUrl, loginData).subscribe(
@@ -118,8 +118,8 @@ export class BoxedSignupComponent implements OnInit, OnDestroy {
     }
   
     const baseUrl = this.apiService.getBaseUrl();
-    // const apiUrl = `${baseUrl}/authenticate`;
-    const apiUrl = "https://opdclinic.greatfive.in/authenticate";
+    const apiUrl = `${baseUrl}/authenticate`;
+    // const apiUrl = "https://salonClinic.greatfive.in/authenticate";
     const loginData = { mobile: this.mobile, password: this.password };
   
     this.http.post(apiUrl, loginData).subscribe(
@@ -145,7 +145,7 @@ export class BoxedSignupComponent implements OnInit, OnDestroy {
   
           // Navigate to the appropriate dashboard based on the user's role
           if (response.role === "Admin" || response.role === "Employee") {
-            this.router.navigate(["/Lading-Page"]).then(() => {
+            this.router.navigate(["/Landing-Page"]).then(() => {
               this.setActiveDropdown();
             });
           } else if (response.role === "SuperAdmin") {
@@ -153,18 +153,18 @@ export class BoxedSignupComponent implements OnInit, OnDestroy {
               this.setActiveDropdown();
             });
           } else {
-            this.router.navigate(["/Lading-Page"]).then(() => {
+            this.router.navigate(["/Landing-Page"]).then(() => {
               this.setActiveDropdown();
             });
           }
         } else {
-          this.router.navigate(["/Lading-Page"]).then(() => {
+          this.router.navigate(["/Landing-Page"]).then(() => {
             this.setActiveDropdown();
           });
         }
       },
       (error) => {
-        this.router.navigate(["/Lading-Page"]).then(() => {
+        this.router.navigate(["/Landing-Page"]).then(() => {
           this.setActiveDropdown();
         });
       }
@@ -202,7 +202,7 @@ export class BoxedSignupComponent implements OnInit, OnDestroy {
   // Method to fetch user data using userid
   getUserData(userId: string) {
     
-    // const userApiUrl = `http://localhost/OPDClinic/getUserDetails/${userId}`;
+    // const userApiUrl = `http://localhost/salonClinic/getUserDetails/${userId}`;
     const baseUrl = this.apiService.getBaseUrl();
     const userApiUrl = `${baseUrl}/getUserDetails/${userId}`;
     // Retrieve the token from local storage

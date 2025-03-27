@@ -42,7 +42,7 @@ export class ConsultantScheduleComponent implements OnInit {
   }
   fetchBranches() {
     this.http
-      // .get<any>("http://localhost/OPDClinic/read/tbl_branch")
+      // .get<any>("http://localhost/salonClinic/read/tbl_branch")
       this.apiService.get("read/tbl_branch").subscribe(
         (response) => {
           if (response.status === 200) {
@@ -66,7 +66,7 @@ export class ConsultantScheduleComponent implements OnInit {
 
     // this.http
     //   .get<any>(
-    //     `http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`
+    //     `http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`
     //   )
       // .subscribe(
         (response) => {
@@ -297,7 +297,7 @@ export class ConsultantScheduleComponent implements OnInit {
     };
 
     // this.http
-    //   .post("http://localhost/OPDClinic/savescedule/tbl_slots", requestBody)
+    //   .post("http://localhost/salonClinic/savescedule/tbl_slots", requestBody)
     //   .subscribe(
         this.apiService.post("savescedule/tbl_slots", requestBody).subscribe(
         (response) => {

@@ -370,7 +370,7 @@ export class ReportsComponent {
   }
 
   fetchBranches() {
-    // this.http.get<any>("http://localhost/OPDClinic/read/tbl_branch").subscribe(
+    // this.http.get<any>("http://localhost/salonClinic/read/tbl_branch").subscribe(
       this.apiService.get("read/tbl_branch").subscribe(
         (response) => {
           if (response.status === 200) {
@@ -389,7 +389,7 @@ export class ReportsComponent {
     const role = "Consultant"; // Define the role you want to filter by
     const endpoint = `get_where_condition_data/tbl_register/${role}`;
     this.apiService.get(endpoint).subscribe(
-    // this.http.get<any>(`http://localhost/OPDClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
+    // this.http.get<any>(`http://localhost/salonClinic/get_where_condition_data/tbl_register/${role}`).subscribe(
         (response) => {
           if (response.status === 200) {
             this.consultants = response.data; // Assign the fetched consultants
@@ -406,7 +406,7 @@ export class ReportsComponent {
   fetchServices() {
     const endpoint = `read/tbl_section`;
     this.apiService.get(endpoint).subscribe(
-    // this.http.get<any>("http://localhost/OPDClinic/read/tbl_section").subscribe(
+    // this.http.get<any>("http://localhost/salonClinic/read/tbl_section").subscribe(
         (response) => {
           if (response.status === 200) {
             this.healthServices = response.data;
@@ -503,7 +503,7 @@ export class ReportsComponent {
     const endpoint = `get_filtered_report/tbl_appointment`;
     // this.apiService.post(endpoint,filters).subscribe(
 
-    // this.http.post("http://localhost/OPDClinic/get_filtered_report/tbl_appointment",filters).pipe(
+    // this.http.post("http://localhost/salonClinic/get_filtered_report/tbl_appointment",filters).pipe(
       this.apiService.post(endpoint,filters).pipe(
     finalize(() => {
           this.isLoading = false; // Stop the loading spinner after the request completes
