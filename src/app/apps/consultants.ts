@@ -49,9 +49,9 @@ export class ConsultantsComponent {
 
   ngOnInit() {
     this.initForm();
-    this.fetchSections(); // Fetch sections on initialization
+    // this.fetchSections(); // Fetch sections on initialization
     this.fetchServices(); 
-    this.fetchdataes(); // Fetch dataes on initialization
+    this.fetchStylists(); // Fetch dataes on initialization
     console.log(this.filterdContactsList); // Log data after fetching it
   }
 
@@ -79,7 +79,7 @@ export class ConsultantsComponent {
 
   fetchServices() {
     // Use ApiService to fetch sections
-    this.apiService.get("read/tbl_servicemst").subscribe(
+    this.apiService.post("read/tbl_servicemst", {}).subscribe(
       (response: any) => {
         if (response.status === 200) {
           console.log("Services List:", response);
@@ -103,11 +103,12 @@ export class ConsultantsComponent {
   }
   
 
-  fetchdataes() {
+  fetchStylists() {
     // Use ApiService to fetch the data
-    this.apiService.get("getsections").subscribe(
+    this.apiService.post("read/tbl_stylists",{}).subscribe(
       (response: any) => {
         if (response.status === 200) {
+          console.log("stylist data :",response);
           this.contactList = response.data; // Assign data to contactList
           this.searchContacts(); // Update filtered list
         } else {
@@ -115,8 +116,8 @@ export class ConsultantsComponent {
         }
       },
       (error) => {
-        console.error("Error fetching data:", error);
-        this.showMessage("Error fetching data.", "error");
+        console.error("Error fetching stylists:", error);
+        this.showMessage("Error fetching stylists.", "error");
       }
     );
   }
@@ -173,7 +174,7 @@ export class ConsultantsComponent {
       services: formData.services, // Ensure services are passed in the API request
     };
     if (formData.id) {
-      const endpoint = `createcunsltant/tbl_register/${formData.id}`;
+      const endpoint = `createcunsltant/tbl_stylists/${formData.id}`;
 
       // console.log("kej")
       // Update user in the API using the con_id
@@ -198,7 +199,7 @@ export class ConsultantsComponent {
               user.mobile =formData.mobile,
               user.password = formData.password;
             }
-            this.fetchdataes(); // Fetch dataes on initialization
+            this.fetchServices(); // Fetch dataes on initialization
 
             this.showMessage("Data has been updated successfully.");
             this.addContactModal.close();
@@ -210,7 +211,7 @@ export class ConsultantsComponent {
           }
         );
     } else {
-      const endpoint = `createcunsltant/tbl_consultants/${formData.id}`;
+      const endpoint = `createcunsltant/tbl_stylists/${formData.id}`;
 
       // Add user to the API
       // this.http
@@ -237,7 +238,7 @@ export class ConsultantsComponent {
 
             this.contactList.unshift(newUser);
             this.searchContacts();
-            this.fetchdataes(); // Fetch dataes on initialization
+            this.fetchStylists(); // Fetch dataes on initialization
 
             this.showMessage("Data has been saved successfully.");
             this.addContactModal.close();
@@ -269,7 +270,7 @@ export class ConsultantsComponent {
           (d) => d.con_id !== contact.con_id
         );
   
-        this.fetchdataes(); // Refresh the data list
+        this.fetchStylists(); // Refresh the data list
         this.showMessage("Data has been deleted successfully.");
         this.addContactModal.close();
       },

@@ -70,7 +70,7 @@
               <th>Sr. No.</th>
               <th>Name</th>
               <th>Qualification</th>
-              <th>Section</th>
+              <th>Services</th>
               <th>Role</th>
              
 
@@ -106,7 +106,10 @@
                 </td>
                 <td>{{ contact.degree }}</td>
                 
-                <td class="whitespace-nowrap">{{ contact.section_name || 'Not Available' }}</td>
+                <td class="whitespace-nowrap">
+                  {{ contact.service_names?.length ? contact.service_names.join(', ') : 'Not Available' }}
+                </td>
+                
 
                 <td>{{ contact.role }}</td>
               
@@ -400,7 +403,8 @@
                 type="checkbox" 
                 [value]="service.id" 
                 (change)="toggleServiceSelection(service.id)" 
-                [checked]="params.controls['services']?.value?.includes(service.id)"
+                [checked]="params.controls['services'].value.includes(service.id)"
+
                 class="form-checkbox text-primary-600 focus:ring-primary-500 w-4 h-4"
               />
               <label class="text-sm text-gray-700">{{ service.name }}</label>
